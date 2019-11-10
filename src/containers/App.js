@@ -14,6 +14,11 @@ class App extends Component {
         showPersons: false
     }
 
+    static getDerivedStateFromProps(props, state) {
+        // console.log('[App.js] getDerivedStateFromProps', props)
+        return state
+    }
+
     // switchNameHandler = (newName) => {
     //     this.setState({
     //         persons: [
@@ -65,6 +70,7 @@ class App extends Component {
         return (
             <div className={styleclasses.App}>
                 <Cockpit
+                    title={this.props.title}
                     showPersons={this.state.showPersons}
                     persons={this.state.persons}
                     clicked={this.togglePersonsHandler} />
