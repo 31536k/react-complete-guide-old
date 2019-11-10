@@ -1,20 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import styleclasses from "./Cockpit.css"
 
 const Cockpit = (props) => {
 
-    const assignedstyles = []
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect')
+    }, [])
 
     let btnClass = ''
     if (props.showPersons) {
         btnClass = styleclasses.Red
     }
 
-    if (props.persons.length <= 2) {
+    const assignedstyles = []
+    if (props.personsLength <= 2) {
         assignedstyles.push(styleclasses.red)
     }
 
-    if (props.persons.length <= 1) {
+    if (props.personsLength <= 1) {
         assignedstyles.push(styleclasses.bold)
     }
 
@@ -29,4 +32,4 @@ const Cockpit = (props) => {
     )
 }
 
-export default Cockpit
+export default React.memo(Cockpit)
