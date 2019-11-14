@@ -1,10 +1,16 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import styleclasses from "./Cockpit.css"
+import AuthContext from "../../context/auth-context"
 
 const Cockpit = (props) => {
+    const toggleButtonRef = useRef(null)
 
     useEffect(() => {
         console.log('[Cockpit.js] useEffect')
+        // toggleButtonRef.current.click()
+        return () => {
+            console.log('[Cockpit.js] cleanup work')
+        }
     }, [])
 
     let btnClass = ''
@@ -25,9 +31,12 @@ const Cockpit = (props) => {
         <div className={styleclasses.Cockpit}>
             <h1>{props.title}</h1>
             <p className={assignedstyles.join(' ')}>This is really working!</p>
-            <button className={btnClass}
+            <button ref={toggleButtonRef} className={btnClass}
                 onClick={props.clicked}>Toggle Persons
             </button>
+            <AuthContext.Consumer>
+                {context => <button onClick={context.login}>log in</button>}
+            </AuthContext.Consumer>
         </div>
     )
 }
